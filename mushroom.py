@@ -2,15 +2,13 @@ import streamlit as st
 import numpy as np
 import joblib
 
-# Load the trained model
-MODEL_PATH = "mushroom_classifier.pkl"  # Update with your correct model path
+MODEL_PATH = "mushroom_classifier.pkl"  
 try:
     model = joblib.load(MODEL_PATH)
 except Exception as e:
     st.error(f"Error loading model: {e}")
     st.stop()
 
-# Define feature selection
 feature_names = [
     "cap-shape", "cap-surface", "cap-color", "bruises", "odor", "gill-attachment",
     "gill-spacing", "gill-size", "gill-color", "stalk-shape", "stalk-root",
@@ -19,7 +17,6 @@ feature_names = [
     "spore-print-color", "population", "habitat"
 ]
 
-# Example feature mapping (modify as per dataset encoding)
 feature_options = {
     "cap-shape": ["bell", "conical", "convex", "flat", "knobbed", "sunken"],
     "cap-surface": ["fibrous", "grooves", "scaly", "smooth"],
@@ -45,22 +42,19 @@ feature_options = {
     "habitat": ["grasses", "leaves", "meadows", "paths", "urban", "waste", "woods"]
 }
 
-# Streamlit UI
-st.title("🍄 Mushroom Classification App")
+st.title("Mushroom Classification App")
 st.write("Select the characteristics of a mushroom to predict whether it's **Edible** or **Poisonous**.")
 
-# Create dropdowns for all features
 user_input = []
 for feature in feature_names:
     selected_value = st.selectbox(f"{feature.replace('-', ' ').capitalize()}:", feature_options[feature])
     user_input.append(feature_options[feature].index(selected_value))  # Convert to numerical value
 
-# Predict button
 if st.button("Predict"):
     try:
         input_array = np.array([user_input]).reshape(1, -1)
         prediction = model.predict(input_array)[0]
-        result = "🍄 Edible" if prediction == 0 else "☠️ Poisonous"
+        result = "Edible" if prediction == 0 else "Poisonous"
         st.success(f"**Prediction: {result}**")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
