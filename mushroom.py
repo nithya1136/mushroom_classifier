@@ -55,6 +55,6 @@ if st.button("Predict"):
         input_array = np.array([user_input]).reshape(1, -1)
         prediction = model.predict(input_array)[0]
         result = "Edible" if prediction == 0 else "Poisonous"
-        st.success(f"**Prediction: {result}**")
+        st.success(f"**Prediction of mushroom: {result}**")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
