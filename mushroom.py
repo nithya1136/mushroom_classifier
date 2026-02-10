@@ -42,7 +42,7 @@ feature_options = {
     "habitat": ["grasses", "leaves", "meadows", "paths", "urban", "waste", "woods"]
 }
 
-st.title("Mushroom Classification App")
+st.title("Mushroom Classification Jenkins")
 st.write("Select the characteristics of a mushroom to predict whether it's **Edible** or **Poisonous**.")
 
 user_input = []
@@ -55,6 +55,6 @@ if st.button("Predict"):
         input_array = np.array([user_input]).reshape(1, -1)
         prediction = model.predict(input_array)[0]
         result = "Edible" if prediction == 0 else "Poisonous"
-        st.success(f"**Prediction of mushroom: {result}**")
+        st.success(f"**Prediction of  mushroom: {result}**")
     except Exception as e:
         st.error(f"Error in prediction: {e}")
